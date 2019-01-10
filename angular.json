@@ -64,7 +64,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-boilerplate:build"
+            "browserTarget": "angular-boilerplate:build",
+            "port": 4000
           },
           "configurations": {
             "production": {
