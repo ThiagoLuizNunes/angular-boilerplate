@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
-
 import { UiModule} from '../ui/ui.module';
 
 @NgModule({
@@ -9,7 +8,6 @@ import { UiModule} from '../ui/ui.module';
   imports: [
     CommonModule,
     UiModule
-  ],
-  bootstrap: [HomeComponent]
+  ]
 })
 export class HomeModule { }
