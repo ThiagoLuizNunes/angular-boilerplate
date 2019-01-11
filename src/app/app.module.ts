@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 
 import { HomeModule } from './modules/home/home.module';
 import { LoginModule } from './modules/login/login.module';
+import { SignupModule } from './modules/signup/signup.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { LoginModule } from './modules/login/login.module';
     ToastrModule.forRoot(),
     HomeModule,
     LoginModule,
+    SignupModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

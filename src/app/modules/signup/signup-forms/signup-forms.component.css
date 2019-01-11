@@ -1,0 +1,12 @@
+.signup-fields {
+  padding: 2em .5em 2em .5em;
+}
+.signup-title {
+  font-family: OpenSans-Bold;
+  text-align: center;
+}
+.signup-group {
+  display: block;
+  margin: auto;
+  width: 350px;
+}
