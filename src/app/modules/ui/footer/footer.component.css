@@ -1,0 +1,10 @@
+.page-footer {
+  background-color: #2b4d9a;
+  color: #fff;
+}
+.footer-copyright {
+  color: #000;
+}
+.footer-copyright > a {
+  color: #ddd;
+}

@@ -1,3 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
+@import "~@fortawesome/fontawesome-free/css/all.min.css";
+
+@font-face {
+  font-family: OpenSans-Regular;
+  src: url('/assets/fonts/OpenSans-Regular.ttf')
+}
+@font-face {
+  font-family: OpenSans-Bold;
+  src: url('/assets/fonts/OpenSans-Bold.ttf')
+}
+@font-face {
+  font-family: VarelaRound-Regular;
+  src: url('/assets/fonts/VarelaRound-Regular.ttf')
+}
+
