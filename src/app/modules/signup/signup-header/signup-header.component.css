@@ -4,8 +4,8 @@
   border-bottom: 1px solid #E0E0E0;
 }
 .signup-nav {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
   text-align: center;
 }
 .signup-nav-link {

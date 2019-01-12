@@ -1,12 +1,23 @@
-.signup-fields {
+.signup-forms {
+  background-color: #1976d2;
+  background-image: linear-gradient(141deg, #115293 0%, #1976d2 51%, #5e9fdf 75%);
   padding: 2em .5em 2em .5em;
 }
+.signup-forms .container {
+  width: 660px;
+  padding: 50px 85px 50px 85px;
+  background-color: #fff;
+  border-radius: 3%;
+}
 .signup-title {
+  margin-bottom: 40px;
   font-family: OpenSans-Bold;
   text-align: center;
 }
 .signup-group {
   display: block;
   margin: auto;
-  width: 350px;
+}
+.signup-group .input-group {
+  margin-bottom: 20px;
 }

@@ -16,3 +16,11 @@
   src: url('/assets/fonts/VarelaRound-Regular.ttf');
 }
 
+
+html, body {
+  height: 100% !important;
+  margin: 0;
+  padding: 0;
+}
+
+

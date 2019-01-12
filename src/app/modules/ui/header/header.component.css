@@ -2,10 +2,9 @@
   font-family: VarelaRound-Regular;
   src: url('/assets/fonts/VarelaRound-Regular.ttf')
 }
-
 .navbar-boilerplate {
-  background-color: #2b4d9a;
-  /* background-color: #509BF5; */
+  background-color: #1976d2;
+  background-image: linear-gradient(141deg, #4691db 0%, #1976d2 51%, #2f83d6 75%);
   font-family: VarelaRound-Regular;
   padding: 0em;
 }
@@ -25,7 +24,7 @@
   transition: color ease-in-out .3s;
 }
 .navbar-boilerplate .nav-link:hover {
-  color: #00b371;
+  color: #424242;
 }
 .navbar-boilerplate .app-singup-link {
   border: 1px solid #ccc;
@@ -38,9 +37,7 @@
 }
 .navbar-boilerplate .app-singup-link:hover {
   color: rgb(255, 255, 255);
-  /* background-color: #00ce81; */
   background-color: #00b371;
-  /* border-color: #00ce81; */
   border-color: #00b371;
 }
 .navbar-boilerplate .app-login-link {
@@ -50,9 +47,6 @@
   padding-right: 18px;
   transition: ease-in-out .3s, border-color ease-in-out .3s, color ease-in-out .2s;
 }
-/* .navbar-boilerplate .app-login-link:hover {
-  color: #0D47A1;
-} */
 @media only screen and (max-width: 768px) {
   .navbar-boilerplate .app-singup-link,
   .navbar-boilerplate .app-login-link {
@@ -62,7 +56,7 @@
   }
   .navbar-boilerplate .app-singup-link:hover,
   .navbar-boilerplate .app-login-link:hover {
-    background-color: #2b4d9a;
-    color: #00b371;
+    background-color: transparent;
+    color: #424242;
   }
 }

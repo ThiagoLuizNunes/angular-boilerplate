@@ -1,32 +1,20 @@
-<div class="signup-fields">
+<div class="signup-forms">
   <div class="container">
-    <h5 class="signup-title">Sing Up</h5>
+    <h5 class="signup-title">CREATE ACCOUNT</h5>
     <div class="signup-group">
       <form #form="ngForm" novalidate>
         <div class="input-group">
-          <span>
-            <i class="fas fa-user"></i>
-          </span>
           <input type="text" class="form-control" placeholder="Name" required="required"
             name="name" [(ngModel)]="user.name">
         </div>
         <div class="input-group">
-          <span>
-            <i class="fas fa-envelope"></i>
-          </span>
           <input type="text" class="form-control" placeholder="Email" required="required" name="name" [(ngModel)]="user.email">
         </div>
         <div class="input-group">
-          <span>
-            <i class="fas fa-key"></i>
-          </span>
           <input type="password" class="form-control"
             placeholder="Password" required="required" name="name" [(ngModel)]="user.password">
         </div>
         <div class="input-group">
-          <span>
-            <i class="fas fa-key"></i>
-          </span>
           <input type="password" [ngClass]="'form-control-signup'" class="form-control" placeholder="Confirm Password"
             required="required" name="name" [(ngModel)]="user.confirm_password">
         </div>
