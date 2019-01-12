@@ -3,7 +3,7 @@
   /* background-color: #1976d2; */
   /* background-image: linear-gradient(141deg, #115293 0%, #1976d2 51%, #5e9fdf 75%); */
   /* background-image: linear-gradient(141deg, #000 0%, #304FFE 51%, #ddd 75%); */
-  background-image: linear-gradient(to right, #1976d2, #5e9fdf);
+  background-image: linear-gradient(to left, #1976d2, #115293);
   padding: 2em .5em 2em .5em;
 }
 .signup-forms .container {
@@ -33,12 +33,13 @@
 }
 .signup-forms .form-group > button {
   border: none;
-  background-color: #1976d2;
-  border-color: linear-gradient(to right, #1976d2, #5e9fdf);
+  /* background-color: linear-gradient(to right, #1976d2, #5e9fdf); */
+  background-image: linear-gradient(to left, #1976d2, #115293);
 }
 .signup-forms .form-group > label {
   font-size: 14px;
 }
 .signup-group .input-group .form-control:active {
-  border-color: linear-gradient(to right, #1976d2, #5e9fdf);
+  /* border-color: linear-gradient(to left, #1976d2, #5e9fdf); */
+  border-color: linear-gradient(to left, #1976d2, #115293);
 }
