@@ -13,12 +13,18 @@
         <div class="input-group">
           <input type="password" class="form-control"
             placeholder="Password" required="required" name="name" [(ngModel)]="user.password">
-        </div>
-        <div class="input-group">
-          <input type="password" [ngClass]="'form-control-signup'" class="form-control" placeholder="Confirm Password"
+          </div>
+          <div class="input-group">
+            <input type="password" [ngClass]="'form-control-signup'" class="form-control" placeholder="Confirm Password"
             required="required" name="name" [(ngModel)]="user.confirm_password">
+          </div>
+          <div class="form-group">
+            <label>
+              <span><span></span></span>I agree all statements in
+              <a href="#" class="term-service">Terms of service</a>
+            </label>
         </div>
-        <div id="btn-login" class="form-group">
+        <div class="form-group">
           <button type="button" class="btn-login btn-primary btn-block btn-lg">Sing Up</button>
         </div>
       </form>
