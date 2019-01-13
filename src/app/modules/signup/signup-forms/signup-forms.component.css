@@ -33,8 +33,11 @@
 }
 .signup-forms .form-group > button {
   border: none;
-  /* background-color: linear-gradient(to right, #1976d2, #5e9fdf); */
-  background-image: linear-gradient(to left, #1976d2, #115293);
+  background-color: #1976d2;
+  transition: background-color ease-in-out .3s;
+}
+.signup-forms .form-group > button:hover {
+  background-color: #115293;
 }
 .signup-forms .form-group > label {
   font-size: 14px;
