@@ -43,6 +43,14 @@
   font-size: 14px;
 }
 .signup-group .input-group .form-control:active {
-  /* border-color: linear-gradient(to left, #1976d2, #5e9fdf); */
   border-color: linear-gradient(to left, #1976d2, #115293);
+}
+@media only screen and (max-width: 768px) {
+  .signup-forms .container {
+    padding: 20px 40px 20px 40px;
+    width: 300px;
+  }
+  .signup-title {
+    font-size: 18px;
+  }
 }
