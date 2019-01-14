@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: '',
-  oapiUrl: '',
-  app_userkey: '_ci-environment_',
+  apiUrl: 'http://localhost:3000/api/v1',
+  app_userkey: 'user_storage',
 };
 
 /*

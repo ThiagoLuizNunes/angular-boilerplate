@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 import ICallback from '../../shared/types/icallback.types';
@@ -10,7 +10,7 @@ import ICallback from '../../shared/types/icallback.types';
 
 export class UserService {
   user = null;
-  oapi = environment.oapiUrl;
+  api = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +22,7 @@ export class UserService {
   }
 
   submit(url: string, user: any, callback: ICallback): any {
-    this.http.post<any>(`${this.oapi}/${url}`, user)
+    this.http.post(`${this.api}/${url}`, user)
       .subscribe(
         response => {
           localStorage.setItem(environment.app_userkey, JSON.stringify(response));
@@ -43,13 +43,12 @@ export class UserService {
   }
 
   signup(user: any, callback: ICallback): any {
-    this.submit('signup', user, callback);
+    this.submit('users', user, callback);
   }
 
   logout(callback?: ICallback): any {
     this.user = null;
     localStorage.removeItem(environment.app_userkey);
-    // httpOptions.headers = httpOptions.headers.set('Authorization', '');
 
     if (callback) {
       callback(null);
