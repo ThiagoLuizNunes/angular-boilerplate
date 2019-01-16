@@ -1,10 +1,64 @@
 {
-  "posts": [
+  "products": [
     {
-      "title":"Add a post to the blog about Angular2",
-      "dueDate": "2015-05-23T18:25:43.511Z",
-      "done": false
+      "id": 1,
+      "name": "quantify Berkshire",
+      "email": "scale Salad indexing",
+      "password": "Personal Loan Account JBOD"
+    },
+    {
+      "id": 2,
+      "name": "Bedfordshire Kina standardization",
+      "email": "infrastructures",
+      "password": "Avon"
+    },
+    {
+      "id": 3,
+      "name": "quantifying unleash cross-platform",
+      "email": "Ergonomic Concrete Shirt Money Market Account",
+      "password": "access"
+    },
+    {
+      "id": 4,
+      "name": "XSS programming portal",
+      "email": "indexing XSS",
+      "password": "Orchestrator"
+    },
+    {
+      "id": 5,
+      "name": "JSON",
+      "email": "neural front-end",
+      "password": "virtual interactive"
+    },
+    {
+      "id": 6,
+      "name": "application",
+      "email": "back-end",
+      "password": "Branding"
+    },
+    {
+      "id": 7,
+      "name": "Designer",
+      "email": "Dynamic installation Refined Soft Mouse",
+      "password": "Future-proofed"
+    },
+    {
+      "id": 8,
+      "name": "Books yellow",
+      "email": "Handcrafted Metal Towels Berkshire",
+      "password": "world-class silver"
+    },
+    {
+      "id": 9,
+      "name": "Awesome Metal Hat Tasty Fresh Sausages",
+      "email": "Sleek Granite Shirt Functionality pixel",
+      "password": "Soft Utah empowering"
+    },
+    {
+      "id": 10,
+      "name": "e-enable efficient",
+      "email": "Concrete",
+      "password": "Unbranded Wooden Pizza card North Dakota"
     }
-  ],
-  "users": []
+  ]
 }
