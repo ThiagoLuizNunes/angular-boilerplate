@@ -20,32 +20,4 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  // getUser(): any {
-    // console.log('Get User: ', this.userService.getUser());
-  // }
-
-  // login(): any {
-  //   this.userService.login(this.user, (err, res) => {
-  //     if (err) {
-  //       return this.msgs.addError(err.errors);
-  //     }
-  //     window.location.reload();
-  //   });
-  // }
-
-  // signup(): any {
-  //   this.userService.signup(this.user, (err, res) => {
-  //     if (err) {
-  //       return this.msgs.addError(err.error.erros);
-  //     }
-  //     this.msgs.addSuccess(res.messages);
-  //     this.login();
-  //   });
-  // }
-
-  // logout() {
-  //   this.userService.logout();
-  //   window.location.reload();
-  // }
 }
