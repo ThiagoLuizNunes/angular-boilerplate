@@ -8,6 +8,7 @@
 
 # dependencies
 /node_modules
+/json-server-api/users.json
 
 # profiling files
 chrome-profiler-events.json
