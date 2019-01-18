@@ -33,6 +33,10 @@ function isAuthenticated({ email, password }) {
   return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1;
 }
 
+function isRegistered({ email }) {
+  return userdb.users.findIndex(user => user.email === email) !== -1;
+}
+
 router.post('/auth/login', (req, res) => {
   const { email, password } = req.body;
   if (isAuthenticated({ email, password }) === false) {
@@ -47,7 +51,7 @@ router.post('/auth/login', (req, res) => {
 
 router.post('/auth/signup', (req, res) => {
   const { name, email, password } = req.body;
-  if (!isAuthenticated({ email, password }) === false) {
+  if (!isRegistered({ email, password }) === false) {
     const status = 401;
     const message = 'User already registered';
     res.status(status).json({ status, message });

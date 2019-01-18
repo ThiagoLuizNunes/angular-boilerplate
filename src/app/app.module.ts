@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +15,6 @@ import { SignupModule } from './modules/signup/signup.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ToastrModule.forRoot(),
     HomeModule,
     LoginModule,
     SignupModule,

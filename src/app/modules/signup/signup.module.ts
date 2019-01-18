@@ -5,12 +5,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { SignupComponent } from './signup.component';
 
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [SignupComponent],
   imports: [
     CommonModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     FormsModule,
   ],
   exports: [SignupComponent]
