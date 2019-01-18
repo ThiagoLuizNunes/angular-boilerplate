@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 import { UserService } from '../user/user.service';
-import { MsgsService } from '../../shared/services/msgs.service';
 
 @Component({
   selector: 'app-login',
@@ -10,14 +9,27 @@ import { MsgsService } from '../../shared/services/msgs.service';
 })
 export class LoginComponent implements OnInit {
 
-  user = {};
-  loginMode: boolean;
-  signupMode: boolean;
-  forgotMode: boolean;
+  user = {
+    email: '',
+    password: '',
+  };
 
-  // constructor(private userService: UserService, private msgs: MsgsService, private loginService: LoginService) {}
-  constructor() {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
+  }
+
+  login(): any {
+    if (this.user.email === '' || this.user.password === '') {
+      alert(`Complete all fields`);
+      return;
+    }
+    this.userService.login(this.user, (err, res) => {
+      if (err) {
+        alert(err.error.message);
+        return;
+      }
+      this.router.navigate(['/']);
+    });
   }
 }

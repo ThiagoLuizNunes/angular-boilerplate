@@ -22,8 +22,6 @@ export class UserService {
   }
 
   submit(url: string, user: any, callback: ICallback): any {
-    console.log(`${this.api}/auth/${url}`);
-
     this.http.post(`${this.api}/auth/${url}`, user)
       .subscribe(
         response => {

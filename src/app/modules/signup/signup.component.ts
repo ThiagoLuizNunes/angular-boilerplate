@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from '../user/user.service';
-import { MsgsService } from '../../shared/services/msgs.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,33 +15,38 @@ export class SignupComponent implements OnInit {
     password: '',
     confirm_password: ''
   };
-
   terms_service = false;
 
-  constructor(private userService: UserService, private msgs: MsgsService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  login(): any {
-    this.userService.login(this.user, (err, res) => {
-      if (err) {
-        return this.msgs.addError(err);
-      }
-      window.location.reload();
-    });
-  }
-
   signup(): any {
+    let empty;
+    Object.entries(this.user).map(att => {
+      if (att[1] === undefined || att[1] === '') {
+        empty = true;
+      }
+    });
+    if (empty) {
+      alert(`Complete all fields`);
+      return;
+    }
     if (this.user.password !== this.user.confirm_password) {
-      return this.msgs.addError(`Password doesn't match`);
+      alert(`Password doesn't mach`);
+      return;
+    }
+    if (!this.terms_service) {
+      alert(`Check Terms of Service`);
+      return;
     }
     this.userService.signup(this.user, (err, res) => {
       if (err) {
-        return this.msgs.addError(err);
+        alert(err.error.message);
+        return;
       }
-      this.msgs.addSuccess(res);
-      this.login();
+      this.router.navigate(['/']);
     });
   }
 
