@@ -1,10 +1,11 @@
 const fs = require('fs');
+const faker = require('faker');
 const bodyParser = require('body-parser');
-const jsonServer = require('json-server');
+const express = require('express');
 const jwt = require('jsonwebtoken');
 
-const server = jsonServer.create();
-const router = jsonServer.router('./db.json');
+const server = express();
+const router = express.Router();
 const userdb = JSON.parse(fs.readFileSync(__dirname + '/users.json', 'UTF-8'));
 
 const SECRET_KEY = '123456789';
@@ -12,6 +13,7 @@ const expiresIn = '1h';
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
+server.use('/api/v1', router);
 
 function createToken(payload) {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
@@ -27,7 +29,11 @@ function isAuthenticated({ email, password }) {
   return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1;
 }
 
-server.post('/auth/login', (req, res) => {
+router.get('/auth/users', (req, res) => {
+  res.json('Users!');
+});
+
+router.post('/auth/login', (req, res) => {
   const { email, password } = req.body;
   if (isAuthenticated({ email, password }) === false) {
     const status = 401;
@@ -35,6 +41,25 @@ server.post('/auth/login', (req, res) => {
     res.status(status).json({ status, message });
     return;
   }
+  const access_token = createToken({ email, password });
+  res.status(200).json({ access_token });
+});
+
+router.post('/auth/signup', (req, res) => {
+  const { name, email, password } = req.body;
+  if (!isAuthenticated({ email, password }) === false) {
+    const status = 401;
+    const message = 'User already registered';
+    res.status(status).json({ status, message });
+    return;
+  }
+  userdb.users.push({
+    id: faker.random.number(),
+    name: name,
+    email: email,
+    password: password
+  });
+  fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8')
   const access_token = createToken({ email, password });
   res.status(200).json({ access_token });
 });
@@ -55,9 +80,6 @@ server.use(/^(?!\/auth).*$/, (req, res, next) => {
     res.status(status).json({ status, message });
   }
 });
-
-server.use(router);
-server.use('/api', router);
 
 server.listen(3000, () => {
   console.log('Run Auth API Server');
