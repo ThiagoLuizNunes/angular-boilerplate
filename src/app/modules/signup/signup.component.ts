@@ -9,7 +9,13 @@ import { MsgsService } from '../../shared/services/msgs.service';
 })
 export class SignupComponent implements OnInit {
 
-  user = {};
+  user = {
+    name: '',
+    email: '',
+    password: '',
+    confirm_password: ''
+  };
+
   terms_service = false;
 
   constructor(private userService: UserService, private msgs: MsgsService) { }
@@ -27,6 +33,9 @@ export class SignupComponent implements OnInit {
   }
 
   signup(): any {
+    if (this.user.password !== this.user.confirm_password) {
+      return this.msgs.addError(`Password doesn't match`);
+    }
     this.userService.signup(this.user, (err, res) => {
       if (err) {
         return this.msgs.addError(err);

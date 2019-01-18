@@ -22,7 +22,9 @@ export class UserService {
   }
 
   submit(url: string, user: any, callback: ICallback): any {
-    this.http.post(`${this.api}/${url}`, user)
+    console.log(`${this.api}/auth/${url}`);
+
+    this.http.post(`${this.api}/auth/${url}`, user)
       .subscribe(
         response => {
           localStorage.setItem(environment.app_userkey, JSON.stringify(response));
@@ -43,7 +45,7 @@ export class UserService {
   }
 
   signup(user: any, callback: ICallback): any {
-    this.submit('users', user, callback);
+    this.submit('signup', user, callback);
   }
 
   logout(callback?: ICallback): any {

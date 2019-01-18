@@ -3,6 +3,8 @@ const faker = require('faker');
 const bodyParser = require('body-parser');
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const morgan = require('morgan');
+const cors = require('./cors');
 
 const server = express();
 const router = express.Router();
@@ -13,6 +15,8 @@ const expiresIn = '1h';
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
+server.use(cors);
+server.use(morgan('tiny'));
 server.use('/api/v1', router);
 
 function createToken(payload) {
@@ -28,10 +32,6 @@ function verifyToken(token) {
 function isAuthenticated({ email, password }) {
   return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1;
 }
-
-router.get('/auth/users', (req, res) => {
-  res.json('Users!');
-});
 
 router.post('/auth/login', (req, res) => {
   const { email, password } = req.body;
