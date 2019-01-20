@@ -7,9 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { SignupComponent } from './signup.component';
 
 import { ToastrModule } from 'ngx-toastr';
+import { UserService } from '../user/user.service';
 
 @NgModule({
   declarations: [SignupComponent],
+  providers: [UserService],
   imports: [
     CommonModule,
     RouterModule,
