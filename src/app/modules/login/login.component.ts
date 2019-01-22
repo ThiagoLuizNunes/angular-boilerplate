@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         alert(err.error.message);
         return;
       }
-      this.router.navigate(['/']);
+      this.router.navigate(['/dashboard']);
     });
   }
 }
