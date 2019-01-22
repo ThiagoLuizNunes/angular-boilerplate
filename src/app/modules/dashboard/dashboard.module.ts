@@ -6,6 +6,7 @@ import { OverviewComponent } from './overview/overview.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { DashboardRoutingModule } from './dashboard.routing.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   imports: [
     CommonModule,
     RouterModule,
+    DashboardRoutingModule
   ]
 })
 export class DashboardModule { }

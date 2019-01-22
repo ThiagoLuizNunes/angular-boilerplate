@@ -47,6 +47,12 @@
       "name": "asd",
       "email": "asd",
       "password": "asd"
+    },
+    {
+      "id": 71140,
+      "name": "lucas",
+      "email": "lucas",
+      "password": "lucas"
     }
   ]
 }
