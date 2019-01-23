@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../user/user.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +17,7 @@ export class SignupComponent implements OnInit {
   };
   terms_service = false;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit {
       alert(`Check Terms of Service`);
       return;
     }
-    this.userService.signup(this.user, (err, res) => {
+    this.authService.signup(this.user, (err, res) => {
       if (err) {
         alert(err.error.message);
         return;

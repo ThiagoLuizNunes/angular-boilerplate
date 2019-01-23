@@ -37,6 +37,15 @@ function isRegistered({ email }) {
   return userdb.users.findIndex(user => user.email === email) !== -1;
 }
 
+function getUser(email, password ) {
+  return userdb.users.find(user => user.email === email && user.password === password ? user : null);
+}
+
+router.post('/auth/validateToken', (req, res) => {
+  const token = req.body.token || '';
+  jwt.verify(token, SECRET_KEY, err => res.status(200).send({ valid: !err }));
+});
+
 router.post('/auth/login', (req, res) => {
   const { email, password } = req.body;
   if (isAuthenticated({ email, password }) === false) {
@@ -45,8 +54,15 @@ router.post('/auth/login', (req, res) => {
     res.status(status).json({ status, message });
     return;
   }
+
   const access_token = createToken({ email, password });
-  res.status(200).json({ access_token });
+  const { name, imageUrl } = getUser(email, password);
+
+  res.status(200).json({
+    name: name,
+    imageUrl: imageUrl,
+    access_token: access_token
+  });
 });
 
 router.post('/auth/signup', (req, res) => {
@@ -57,12 +73,15 @@ router.post('/auth/signup', (req, res) => {
     res.status(status).json({ status, message });
     return;
   }
+
   userdb.users.push({
     id: faker.random.number(),
     name: name,
     email: email,
-    password: password
+    password: password,
+    imageUrl: 'https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg'
   });
+
   fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8')
   const access_token = createToken({ email, password });
   res.status(200).json({ access_token });

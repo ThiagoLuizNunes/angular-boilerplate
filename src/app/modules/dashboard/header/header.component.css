@@ -1,7 +1,18 @@
 .skin-blue .main-header .navbar {
   height: 50px;
-  background-color: #3c8dbc;
+  background-color: #1976d2;
+  background-image: linear-gradient(to right, #1976d2, #5e9fdf);
+}
+.skin-blue .main-header .logo {
+  background-color: #1976d2;
+  color: #fff;
+  border-bottom: 0 solid transparent;
 }
 .main-header .sidebar-toggle {
-  padding: 5px 5px;
+  padding: 5px;
+  transition: all ease-in-out .3s;
 }
+.main-header .sidebar-toggle:hover {
+  background-color: #5e9fdf;
+}
+

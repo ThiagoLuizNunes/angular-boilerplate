@@ -1,24 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { SignupComponent } from './signup.component';
 import { SignupRoutingModule } from './signup.routing.module';
-import { UserService } from '../user/user.service';
-
-// import { ToastrModule } from 'ngx-toastr';
+import { AuthService } from '../auth/auth.service';
 
 @NgModule({
   declarations: [SignupComponent],
-  providers: [UserService],
+  providers: [AuthService],
   imports: [
     CommonModule,
-    RouterModule,
-    HttpClientModule,
-    // BrowserAnimationsModule,
-    // ToastrModule.forRoot(),
     FormsModule,
     SignupRoutingModule,
   ]

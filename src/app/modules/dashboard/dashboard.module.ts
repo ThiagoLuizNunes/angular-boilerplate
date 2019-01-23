@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard.component';
 import { OverviewComponent } from './overview/overview.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -19,6 +20,7 @@ import { DashboardRoutingModule } from './dashboard.routing.module';
   imports: [
     CommonModule,
     RouterModule,
+    HttpClientModule,
     DashboardRoutingModule
   ]
 })

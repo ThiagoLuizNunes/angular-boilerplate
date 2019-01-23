@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -7,11 +8,11 @@ import ICallback from '../../shared/types/icallback.types';
   providedIn: 'root'
 })
 
-export class UserService {
+export class AuthService {
   user = null;
   api = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getUser(): any {
     if (!this.user) {
@@ -21,7 +22,7 @@ export class UserService {
   }
 
   submit(url: string, user: any, callback: ICallback): any {
-    this.http.post(`${this.api}/auth/${url}`, user)
+    this.http.post<any>(`${this.api}/auth/${url}`, user)
       .subscribe(
         response => {
           localStorage.setItem(environment.app_userkey, JSON.stringify(response));
@@ -48,9 +49,26 @@ export class UserService {
   logout(callback?: ICallback): any {
     this.user = null;
     localStorage.removeItem(environment.app_userkey);
-
+    this.router.navigate(['/login']);
     if (callback) {
       callback(null);
     }
+  }
+
+  isAuthenticated(token: any, callback: ICallback): any {
+    this.http.post<any>(`${this.api}/auth/validateToken`, { token })
+      .subscribe(
+        response => {
+          if (!response.valid) {
+            this.logout();
+          } else {
+            // TODO: add header authorization
+            if (callback) callback(null, response);
+          }
+        },
+        error => {
+          if (callback) callback(error);
+        }
+      );
   }
 }

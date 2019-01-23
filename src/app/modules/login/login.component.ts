@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from '../user/user.service';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
   }
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
       alert(`Complete all fields`);
       return;
     }
-    this.userService.login(this.user, (err, res) => {
+    this.authService.login(this.user, (err, res) => {
       if (err) {
         alert(err.error.message);
         return;

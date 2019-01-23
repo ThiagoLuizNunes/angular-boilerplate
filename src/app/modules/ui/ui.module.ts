@@ -5,7 +5,6 @@ import { RouterModule } from '@angular/router';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { UserService } from '../user/user.service';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -14,7 +13,7 @@ import { UserService } from '../user/user.service';
     HttpClientModule,
     RouterModule
   ],
-  providers: [UserService],
+  providers: [],
   exports: [HeaderComponent, FooterComponent]
 })
 export class UiModule { }

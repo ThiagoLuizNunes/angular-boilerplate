@@ -53,6 +53,19 @@
       "name": "lucas",
       "email": "lucas",
       "password": "lucas"
+    },
+    {
+      "id": 72435,
+      "name": "caio",
+      "email": "caio",
+      "password": "caio"
+    },
+    {
+      "id": 26878,
+      "name": "image",
+      "email": "image",
+      "password": "image",
+      "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
     }
   ]
 }
