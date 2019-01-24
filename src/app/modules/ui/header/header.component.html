@@ -30,12 +30,8 @@
           </a>
           <ul class="dropdown-menu">
             <li class="user-footer">
-              <div class="pull-left">
-                <a [routerLink]="[ '/dashboard/overview']" class="btn btn-default btn-flat">Dashboard</a>
-              </div>
-              <div class="pull-right">
-                <a (click)="logout()" class="btn btn-default btn-flat">Sign out</a>
-              </div>
+              <a [routerLink]="[ '/dashboard/overview']" class="profile-option">Dashboard</a>
+              <a (click)="logout()" class="profile-option">Sign out</a>
             </li>
           </ul>
         </li>

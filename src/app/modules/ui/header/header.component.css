@@ -65,6 +65,24 @@
 .navbar-boilerplate .user-name:hover {
   color: #424242;
 }
+.navbar-nav > li > .dropdown-menu {
+  width: 50px;
+}
+.dropdown-menu .user-footer {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.dropdown-menu .profile-option {
+  cursor: pointer;
+  margin: 5px;
+  color: #424242;
+  transition: all ease-in-out .3s;
+}
+.dropdown-menu .profile-option:hover {
+  background-color: #5e9fdf;
+  color: #fff;
+}
 @media only screen and (max-width: 768px) {
   .navbar-boilerplate .app-singup-link,
   .navbar-boilerplate .app-login-link {
