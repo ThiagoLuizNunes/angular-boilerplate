@@ -2,7 +2,7 @@
   <header class="main-header">
     <a [routerLink]="['/']" class="logo">
       <span class="logo-mini"><b>A</b>LT</span>
-      <span class="logo-lg"><b>Web</b> Assista</span>
+      <span class="logo-lg"><b>Angular</b> Boilerplate</span>
     </a>
     <nav class="navbar navbar-static-top" role="navigation">
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -11,18 +11,14 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{ user.imageUrl }}" class="user-image" alt="User Image">
               <span class="hidden-xs">{{ user.name }}</span>
             </a>
             <ul class="dropdown-menu">
               <li class="user-footer">
-                <div class="pull-left">
-                  <a  class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a (click)="logout()" class="btn btn-default btn-flat">Sign out</a>
-                </div>
+                <a [routerLink]="['/dashboard/profile']" class="profile-option">Profile</a>
+                <a (click)="logout()" class="profile-option">Sign out</a>
               </li>
             </ul>
           </li>
