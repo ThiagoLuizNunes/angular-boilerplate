@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
     }
     this.authService.login(this.user, (err, res) => {
       if (err) {
-        alert(err.error.message);
+        console.log(err);
+        alert(err.error);
         return;
       }
       this.router.navigate(['/dashboard']);

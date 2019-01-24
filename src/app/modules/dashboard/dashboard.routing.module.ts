@@ -15,6 +15,7 @@ const dashboardRoutes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'overview' },
       { path: 'overview', component: OverviewComponent },
       { path: 'profile', component: ProfileComponent },
+      { path: '**', pathMatch: 'full', redirectTo: 'overview' },
     ]
   },
 ];

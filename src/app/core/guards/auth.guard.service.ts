@@ -15,8 +15,8 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
 
-      const user = JSON.parse(localStorage.getItem(environment.app_userkey));
-      if (!user) {
+    const user = this.authService.getUser();
+    if (!user) {
         this.router.navigate(['/login']);
         return false;
       }

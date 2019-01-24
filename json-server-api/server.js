@@ -41,6 +41,11 @@ function getUser(email, password ) {
   return userdb.users.find(user => user.email === email && user.password === password ? user : null);
 }
 
+router.get('/auth/test', (req, res) => {
+  console.log(req.headers)
+  res.status(200).send(userdb);
+});
+
 router.post('/auth/validateToken', (req, res) => {
   const token = req.body.token || '';
   jwt.verify(token, SECRET_KEY, err => res.status(200).send({ valid: !err }));

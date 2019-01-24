@@ -21,6 +21,22 @@ export class AuthService {
     return this.user;
   }
 
+  getTest(callback: ICallback): any {
+    this.http.get<any>(`${this.api}/auth/test`)
+      .subscribe(
+        response => {
+          if (callback) {
+            callback(null, response);
+          }
+        },
+        error => {
+          if (callback) {
+            callback(error);
+          }
+        }
+      );
+  }
+
   submit(url: string, user: any, callback: ICallback): any {
     this.http.post<any>(`${this.api}/auth/${url}`, user)
       .subscribe(
