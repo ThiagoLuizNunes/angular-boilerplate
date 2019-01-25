@@ -56,11 +56,11 @@
 .signup-forms .form-group > button {
   font-size: 18px;
   border: none;
-  background-color: #00b371;;
+  background-color: #00BFA5;;
   transition: background-color ease-in-out .3s;
 }
 .signup-forms .form-group > button:hover {
-  background-color: #00ce81;
+  background-color: #009688;
 }
 .signup-forms input[type='checkbox'] {
   vertical-align: middle;

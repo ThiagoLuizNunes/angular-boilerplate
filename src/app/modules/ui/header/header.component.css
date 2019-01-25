@@ -1,7 +1,3 @@
-@font-face {
-  font-family: VarelaRound-Regular;
-  src: url('/assets/fonts/VarelaRound-Regular.ttf')
-}
 .navbar-boilerplate {
   background-image: linear-gradient(to right, #1976d2, #5e9fdf);
   font-family: VarelaRound-Regular;
@@ -23,7 +19,7 @@
   transition: color ease-in-out .3s;
 }
 .navbar-boilerplate .nav-link:hover {
-  color: #424242;
+  color: #00E676;
 }
 .navbar-boilerplate .app-singup-link {
   border: 1px solid #ccc;
@@ -36,8 +32,8 @@
 }
 .navbar-boilerplate .app-singup-link:hover {
   color: rgb(255, 255, 255);
-  background-color: #00b371;
-  border-color: #00b371;
+  background-color: #00BFA5;
+  border-color: #00BFA5;
 }
 .navbar-boilerplate .app-login-link {
   padding-top: 5px;
@@ -49,21 +45,15 @@
 .navbar-boilerplate .user-image {
   cursor: pointer;
 }
-.navbar-boilerplate .dropdown-toggle {
-  color: #fff;
-  transition: all ease-in-out .3s;
-}
-.navbar-boilerplate .dropdown-toggle:hover {
-  color: #424242;
-  background: transparent;
-}
-.navbar-boilerplate .user-name {
+.navbar-boilerplate .dropdown-toggle, .navbar-boilerplate .user-name {
   cursor: pointer;
   color: #fff;
   transition: all ease-in-out .3s;
 }
-.navbar-boilerplate .user-name:hover {
-  color: #424242;
+.navbar-boilerplate .dropdown-toggle:hover,
+.dropdown-toggle:hover > span {
+  color: #00E676;
+  background: transparent;
 }
 .navbar-nav > li > .dropdown-menu {
   width: 50px;
@@ -93,6 +83,6 @@
   .navbar-boilerplate .app-singup-link:hover,
   .navbar-boilerplate .app-login-link:hover {
     background-color: transparent;
-    color: #424242;
+    color: #00E676;
   }
 }
