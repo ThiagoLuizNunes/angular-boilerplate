@@ -36,3 +36,14 @@
   background-color: #616467;
   color: #fff;
 }
+@media only screen and (max-width: 768px) {
+  .container {
+    width: auto;
+  }
+  .profile {
+    flex-direction: column-reverse
+  }
+  .personal-image {
+    margin-bottom: 25px;
+  }
+}
