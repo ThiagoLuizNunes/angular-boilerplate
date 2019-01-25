@@ -1,5 +1,10 @@
 .container {
+  font-family: OpenSans-Regular;
   width: 700px;
+}
+.profile-title {
+  font-family: inherit;
+  margin-top: 20px;
 }
 .profile {
   display: flex;
@@ -8,6 +13,26 @@
 .personal-info {
   flex: 3;
 }
+.personal-title {
+  font-family: inherit;
+}
 .personal-image {
   flex: 1;
+}
+.btn-primary {
+  border: none;
+  background-color: #1976d2;
+  transition: all ease-in-out .3s;
+}
+.btn-primary:hover {
+  background-color: #0D47A1;
+}
+.btn-default {
+  background-color: #fff;
+  color: #616467;
+  transition: all ease-in-out .3s;
+}
+.btn-default:hover {
+  background-color: #616467;
+  color: #fff;
 }
