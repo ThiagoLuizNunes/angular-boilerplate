@@ -1,4 +1,5 @@
 .skin-blue .main-header .navbar {
+  font-family: VarelaRound-Regular;
   height: 50px;
   background-color: #1976d2;
   background-image: linear-gradient(to right, #1976d2, #5e9fdf);
@@ -8,13 +9,35 @@
   color: #fff;
   border-bottom: 0 solid transparent;
 }
-.main-header .sidebar-toggle {
+.skin-blue .main-header .navbar .sidebar-toggle {
+  background-color: transparent;
   padding: 5px;
   transition: all ease-in-out .3s;
 }
-.main-header .sidebar-toggle:hover {
-  background-color: #5e9fdf;
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+  color: #00E676;
 }
+
+
+.navbar .dropdown-toggle, .user-name {
+  cursor: pointer;
+  color: #fff;
+  transition: all ease-in-out .3s;
+}
+.navbar .dropdown-toggle:hover,
+.navbar .dropdown-toggle:hover > span {
+  color: #00E676;
+  background-color: transparent;
+}
+.skin-blue .main-header .navbar .nav > li > a {
+  color: #fff;
+  background-color: transparent;
+}
+.skin-blue .main-header .navbar .nav > li > a:hover {
+  color: #00E676;
+}
+
+
 .navbar-nav > li > .dropdown-menu {
   width: 50px;
 }
