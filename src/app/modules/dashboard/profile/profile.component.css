@@ -1,0 +1,13 @@
+.container {
+  width: 700px;
+}
+.profile {
+  display: flex;
+  justify-content: space-between;
+}
+.personal-info {
+  flex: 3;
+}
+.personal-image {
+  flex: 1;
+}

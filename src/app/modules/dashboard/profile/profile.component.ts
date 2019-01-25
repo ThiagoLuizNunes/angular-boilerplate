@@ -8,17 +8,12 @@ import { AuthService } from '../../auth/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
+  user = {};
+
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.user = this.authService.getUser();
   }
 
-  testInterceptor = () => {
-    this.authService.getTest((err, res) => {
-      if (err) {
-        console.log(err);
-      }
-      console.log(res);
-    })
-  }
 }

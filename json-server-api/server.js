@@ -65,6 +65,7 @@ router.post('/auth/login', (req, res) => {
 
   res.status(200).json({
     name: name,
+    email: email,
     imageUrl: imageUrl,
     access_token: access_token
   });
