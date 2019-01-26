@@ -11,7 +11,7 @@ const router = express.Router();
 const userdb = JSON.parse(fs.readFileSync(__dirname + '/users.json', 'UTF-8'));
 
 const SECRET_KEY = '123456789';
-const expiresIn = '10s';
+const expiresIn = '60s';
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
