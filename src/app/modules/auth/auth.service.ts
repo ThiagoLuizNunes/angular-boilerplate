@@ -76,14 +76,16 @@ export class AuthService {
       .subscribe(
         response => {
           if (!response.valid) {
-            this.logout();
+            localStorage.removeItem(environment.app_userkey);
+            callback(response);
           } else {
-            // TODO: add header authorization
-            if (callback) callback(null, response);
+            callback(null, response);
           }
         },
         error => {
-          if (callback) callback(error);
+          if (callback) {
+            callback(error);
+          }
         }
       );
   }

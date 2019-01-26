@@ -9,14 +9,23 @@ import { AuthService } from '../../auth/auth.service';
 export class HeaderComponent implements OnInit {
 
   showMenu = true;
-  user = {};
+  user: any;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.user = this.authService.getUser();
-    if (this.user) {
-      this.showMenu = false;
+    if (!this.user) {
+      this.showMenu = true;
+    } else {
+      this.authService.isAuthenticated(this.user.access_token, (err, res) => {
+        if (err) {
+          this.user = null;
+          this.showMenu = true;
+          return;
+        }
+        this.showMenu = false;
+      });
     }
   }
   logout = () => this.authService.logout();

@@ -11,7 +11,7 @@ const router = express.Router();
 const userdb = JSON.parse(fs.readFileSync(__dirname + '/users.json', 'UTF-8'));
 
 const SECRET_KEY = '123456789';
-const expiresIn = '1h';
+const expiresIn = '10s';
 
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use(bodyParser.json());
@@ -40,11 +40,6 @@ function isRegistered({ email }) {
 function getUser(email, password ) {
   return userdb.users.find(user => user.email === email && user.password === password ? user : null);
 }
-
-router.get('/auth/test', (req, res) => {
-  console.log(req.headers)
-  res.status(200).send(userdb);
-});
 
 router.post('/auth/validateToken', (req, res) => {
   const token = req.body.token || '';
@@ -93,7 +88,7 @@ router.post('/auth/signup', (req, res) => {
   res.status(200).json({ access_token });
 });
 
-server.use(/^(?!\/auth).*$/, (req, res, next) => {
+server.use(/^(?!\/api\/v1\/).*$/, (req, res, next) => {
   if (req.headers.authorization === undefined || req.headers.authorization.split(' ')[0] !== 'Bearer') {
     const status = 401;
     const message = 'Bad authorization header';
