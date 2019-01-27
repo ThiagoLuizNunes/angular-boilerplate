@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import ICallback from '../../shared/types/icallback.types';
@@ -11,6 +11,8 @@ import ICallback from '../../shared/types/icallback.types';
 export class AuthService {
   user = null;
   api = environment.apiUrl;
+
+  emitterIsAuthenticated = new EventEmitter<boolean>();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -65,13 +67,12 @@ export class AuthService {
   logout(callback?: ICallback): any {
     this.user = null;
     localStorage.removeItem(environment.app_userkey);
-    this.router.navigate(['/login']);
     if (callback) {
       callback(null);
     }
   }
 
-  isAuthenticated(token: any, callback: ICallback): any {
+  isAuthenticated(token: any, callback?: ICallback): any {
     this.http.post<any>(`${this.api}/auth/validateToken`, { token })
       .subscribe(
         response => {
