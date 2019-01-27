@@ -23,4 +23,6 @@ html, body {
   padding: 0;
 }
 
-
+#toast-container > div {
+  opacity:1;
+}

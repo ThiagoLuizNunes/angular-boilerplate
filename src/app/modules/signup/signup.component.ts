@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth/auth.service';
-
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -17,7 +17,10 @@ export class SignupComponent implements OnInit {
   };
   terms_service = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private router: Router,
+    private toastr: ToastrService,
+    private authService: AuthService ) { }
 
   ngOnInit() {
   }
@@ -30,15 +33,15 @@ export class SignupComponent implements OnInit {
       }
     });
     if (empty) {
-      alert(`Complete all fields`);
+      this.toastr.error('Complete all fields');
       return;
     }
     if (this.user.password !== this.user.confirm_password) {
-      alert(`Password doesn't mach`);
+      this.toastr.error(`Password doesn't mach`);
       return;
     }
     if (!this.terms_service) {
-      alert(`Check Terms of Service`);
+      this.toastr.error(`Check Terms of Service`);
       return;
     }
     this.authService.signup(this.user, (err, res) => {
