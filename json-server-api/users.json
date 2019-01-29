@@ -7,64 +7,17 @@
       "password": "thiago"
     },
     {
-      "id": 2,
-      "name": "bruno",
-      "email": "bruno@email.com",
-      "password": "bruno"
-    },
-    {
-      "id": 98120,
-      "name": "Nepalese Rupee Concrete paradigms",
-      "email": "1080p Maryland Soft",
-      "password": "Agent workforce Fresh"
-    },
-    {
-      "id": 32144,
-      "name": "Washington Computer",
-      "email": "array",
-      "password": "Tasty Soft Chips challenge 1080p"
-    },
-    {
-      "id": 89936,
-      "name": "nunes",
-      "email": "nunes@gmail.com",
-      "password": "nunes"
-    },
-    {
-      "id": 62566,
-      "name": "luiz",
-      "email": "luiz@gmail.com",
-      "password": "luiz"
-    },
-    {
-      "id": 37104,
-      "name": "zxc",
-      "email": "ZXC",
-      "password": "ZXC"
-    },
-    {
-      "id": 49113,
-      "name": "asd",
-      "email": "asd",
-      "password": "asd"
-    },
-    {
-      "id": 71140,
-      "name": "lucas",
-      "email": "lucas",
-      "password": "lucas"
-    },
-    {
-      "id": 72435,
-      "name": "caio",
-      "email": "caio",
-      "password": "caio"
-    },
-    {
       "id": 26878,
       "name": "image",
       "email": "image",
       "password": "image",
+      "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
+    },
+    {
+      "id": 65223,
+      "name": "asd",
+      "email": "asd",
+      "password": "asd",
       "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
     }
   ]

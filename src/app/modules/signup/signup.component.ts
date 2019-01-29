@@ -27,13 +27,18 @@ export class SignupComponent implements OnInit {
 
   signup(): any {
     let empty;
+    const emailRegex = /\S+@\S+\.\S+/;
     Object.entries(this.user).map(att => {
       if (att[1] === undefined || att[1] === '') {
         empty = true;
       }
     });
     if (empty) {
-      this.toastr.error('Complete all fields');
+      this.toastr.error(`Complete all fields`);
+      return;
+    }
+    if (!this.user.email.match(emailRegex)) {
+      this.toastr.error(`Invalid email`);
       return;
     }
     if (this.user.password !== this.user.confirm_password) {
@@ -46,7 +51,7 @@ export class SignupComponent implements OnInit {
     }
     this.authService.signup(this.user, (err, res) => {
       if (err) {
-        alert(err.error.message);
+        this.toastr.error(err.error.message);
         return;
       }
       this.router.navigate(['/dashboard']);
