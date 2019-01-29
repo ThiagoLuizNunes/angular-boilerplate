@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth/auth.service';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -48,6 +49,7 @@ export class SignupComponent implements OnInit {
     if (!this.terms_service) {
       this.toastr.error(`Check Terms of Service`);
       return;
+
     }
     this.authService.signup(this.user, (err, res) => {
       if (err) {
@@ -58,4 +60,7 @@ export class SignupComponent implements OnInit {
     });
   }
 
+  onKeydEnter(event: any) {
+    this.signup();
+  }
 }

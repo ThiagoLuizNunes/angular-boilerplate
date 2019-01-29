@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   login(): any {
     if (this.user.email === '' || this.user.password === '') {
-      alert(`Complete all fields`);
+      this.toastr.error(`Complete all fields`);
       return;
     }
     this.authService.login(this.user, (err, res) => {
@@ -36,5 +36,9 @@ export class LoginComponent implements OnInit {
       }
       this.router.navigate(['/dashboard']);
     });
+  }
+
+  onKeydEnter(event: any) {
+    this.login();
   }
 }
