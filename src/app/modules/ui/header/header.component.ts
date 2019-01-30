@@ -13,13 +13,15 @@ export class HeaderComponent implements OnInit {
   user: any;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService) { }
 
   ngOnInit() {
-    this.user = this.authService.getUser();
-    // this.route.data.subscribe();
+    this.route.data.subscribe(
+      info => {
+        this.user = info.user;
+      }
+    );
     if (!this.user) {
       this.showMenu = true;
     } else {
