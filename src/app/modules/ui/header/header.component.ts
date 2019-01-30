@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,10 +12,14 @@ export class HeaderComponent implements OnInit {
   showMenu = true;
   user: any;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.user = this.authService.getUser();
+    // this.route.data.subscribe();
     if (!this.user) {
       this.showMenu = true;
     } else {

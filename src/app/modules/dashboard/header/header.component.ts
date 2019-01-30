@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +11,16 @@ export class HeaderComponent implements OnInit {
 
   user = {};
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService) { }
 
   ngOnInit() {
+    console.log('OnInit')
     this.user = this.authService.getUser();
+    // console.log(this.user)
+    // this.user = this.route.data.subscribe();
   }
 
   logout() {

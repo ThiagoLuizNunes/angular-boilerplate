@@ -9,8 +9,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     const user = this.authService.getUser();
-    console.log('inside interceptor')
-    let tokenReq = req.clone({
+    const tokenReq = req.clone({
       setHeaders: {
         Authorization: `Bearer ${user ? user.access_token : ''}`
       }

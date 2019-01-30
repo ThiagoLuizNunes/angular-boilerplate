@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { DashboardRoutingModule } from './dashboard.routing.module';
+import { UserDetailResolver } from 'src/app/core/guards/user.detail.guard';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { DashboardRoutingModule } from './dashboard.routing.module';
     RouterModule,
     HttpClientModule,
     DashboardRoutingModule,
-  ]
+  ],
+  providers: [UserDetailResolver]
 })
 export class DashboardModule { }
