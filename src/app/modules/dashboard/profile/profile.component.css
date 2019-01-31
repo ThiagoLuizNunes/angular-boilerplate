@@ -1,5 +1,5 @@
 .container {
-  font-family: VarelaRound-Regular;
+  font-family: OpenSans-Regular;
   width: 700px;
 }
 .profile-title {
@@ -36,6 +36,51 @@
   background-color: #616467;
   color: #fff;
 }
+.personal-image {
+  text-align: center;
+}
+.personal-image:hover {
+  text-align: center;
+}
+.personal-image input[type="file"] {
+  display: none;
+}
+.personal-figure {
+  position: relative;
+}
+.personal-figure .personal-avatar {
+  cursor: pointer;
+  width: 120px;
+  height: 120px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  border: 2px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+  transition: all ease-in-out .3s;
+}
+.personal-figure .personal-avatar:hover {
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+}
+.personal-figure .personal-figcaption {
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
+  transition: all ease-in-out .3s;
+}
+.personal-figure .personal-figcaption:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, .5);
+}
+.personal-figure .personal-figcaption > img {
+  margin-top: 32.5px;
+  width: 50px;
+  height: 50px;
+}
 @media only screen and (max-width: 768px) {
   .container {
     width: auto;
@@ -43,7 +88,7 @@
   .profile {
     flex-direction: column-reverse
   }
-  .personal-image {
+  .personal-figure {
     margin-bottom: 25px;
   }
 }
