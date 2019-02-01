@@ -49,6 +49,7 @@ router.post('/auth/login', (req, res) => {
   }
   const access_token = createToken({ email, password });
   const user = getUser(email, password);
+  delete user.password;
   user.access_token = access_token;
   res.status(200).json(user);
 });
@@ -74,21 +75,21 @@ router.post('/auth/signup', (req, res) => {
 });
 
 router.patch('/auth/user', (req, res) => {
-  const id = req.body.id;
+  const { id, name, email, password, imageUrl } = req.body;
   if (!isRegistered(id) === false) {
     const status = 401;
     const message = 'User not found';
     res.status(status).json({ status, message });
     return;
   }
-  const access_token = createToken({id});
+  const access_token = createToken({ email, password });
   const index = userdb.users.findIndex(k => k.id == id);
-  userdb.users[index].name = req.body.name;
-  userdb.users[index].email = req.body.email;
-  userdb.users[index].password = req.body.password;
-  userdb.users[index].imageUrl = req.body.imageUrl;
+  userdb.users[index].name = name;
+  userdb.users[index].email = email;
+  userdb.users[index].password = password;
+  userdb.users[index].imageUrl = imageUrl;
   fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8');
-  const user = { ...req.body, access_token };
+  const user = { name, email, imageUrl, access_token };
   res.status(200).json(user);
 });
 

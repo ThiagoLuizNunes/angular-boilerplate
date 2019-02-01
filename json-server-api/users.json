@@ -12,20 +12,6 @@
       "email": "image",
       "password": "image",
       "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
-    },
-    {
-      "id": 65223,
-      "name": "asd",
-      "email": "asd",
-      "password": "asd",
-      "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
-    },
-    {
-      "id": 79214,
-      "name": "zxc",
-      "email": "zxc@gmail.com",
-      "password": "zxc",
-      "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
     }
   ]
 }

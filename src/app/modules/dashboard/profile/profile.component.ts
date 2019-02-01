@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router, ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -12,35 +14,58 @@ export class ProfileComponent implements OnInit {
   private user: any;
 
   constructor(
+    private route: ActivatedRoute,
     private toastr: ToastrService,
     private authService: AuthService
-  ) { }
+    ) { }
 
   ngOnInit() {
-    this.user = this.authService.getUser();
+    this.route.data.subscribe(
+      info => {
+        this.user = info.user;
+      }
+    );
   }
 
   onSubmit(form) {
-    let empty;
+    let empty: boolean;
     const emailRegex = /\S+@\S+\.\S+/;
-    Object.entries(this.user).map(att => {
+    Object.entries(form.value).map(att => {
       if (att[1] === undefined || att[1] === '') {
         empty = true;
       }
     });
-    if (empty || !this.user.password || !this.user.confirm_password) {
-      this.toastr.error(`Complete all fields`);
+    if (empty || !form.value.password || !form.value.confirm_password) {
+      this.toastr.error(`Complete todos os campos`);
       return;
     }
-    if (!this.user.email.match(emailRegex)) {
-      this.toastr.error(`Invalid email`);
+    if (!form.value.email.match(emailRegex)) {
+      this.toastr.error(`Email inválido`);
       return;
     }
-    if (this.user.password !== this.user.confirm_password) {
-      this.toastr.error(`Password doesn't mach`);
+    if (form.value.password !== form.value.confirm_password) {
+      this.toastr.error(`Senhas não conferem`);
       return;
     }
-    console.log(this.user);
-    console.log(form.value);
+    form.value.id = this.user.id;
+    form.value.imageUrl = this.user.imageUrl;
+    delete form.value.confirm_password;
+
+
+    console.log('Old', this.user);
+    console.log('Form value', form.value);
+
+
+    this.authService.patchUser(form.value, (err, res) => {
+      if (err) {
+        this.toastr.error(err.error.message);
+        return;
+      }
+      // this.user = {...this.user.id, ...res };
+      console.log('New ', res);
+      console.log('Spread ', this.user );
+      this.toastr.success(`Usuário atualizado`);
+      form.reset();
+    });
   }
 }
