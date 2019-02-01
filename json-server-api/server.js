@@ -9,7 +9,6 @@ const cors = require('./cors');
 const server = express();
 const router = express.Router();
 const userdb = JSON.parse(fs.readFileSync(__dirname + '/users.json', 'UTF-8'));
-
 const SECRET_KEY = '123456789';
 const expiresIn = '1h';
 
@@ -22,22 +21,16 @@ server.use('/api/v1', router);
 function createToken(payload) {
   return jwt.sign(payload, SECRET_KEY, { expiresIn });
 }
-
-// Verify the token
 function verifyToken(token) {
   return jwt.verify(token, SECRET_KEY, (err, decode) => decode !== undefined ? decode : err);
 }
-
-// Check if the user exists in database
 function isAuthenticated({ email, password }) {
   return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1;
 }
-
-function isRegistered({ email }) {
-  return userdb.users.findIndex(user => user.email === email) !== -1;
+function isRegistered({ value }) {
+  return userdb.users.findIndex(user => user.email === value || user.id === value) !== -1;
 }
-
-function getUser(email, password ) {
+function getUser(email, password) {
   return userdb.users.find(user => user.email === email && user.password === password ? user : null);
 }
 
@@ -54,27 +47,20 @@ router.post('/auth/login', (req, res) => {
     res.status(status).json({ status, message });
     return;
   }
-
   const access_token = createToken({ email, password });
-  const { name, imageUrl } = getUser(email, password);
-
-  res.status(200).json({
-    name: name,
-    email: email,
-    imageUrl: imageUrl,
-    access_token: access_token
-  });
+  const user = getUser(email, password);
+  user.access_token = access_token;
+  res.status(200).json(user);
 });
 
 router.post('/auth/signup', (req, res) => {
   const { name, email, password } = req.body;
-  if (!isRegistered({ email, password }) === false) {
+  if (!isRegistered(email) === false) {
     const status = 401;
     const message = 'User already registered';
     res.status(status).json({ status, message });
     return;
   }
-
   userdb.users.push({
     id: faker.random.number(),
     name: name,
@@ -82,10 +68,28 @@ router.post('/auth/signup', (req, res) => {
     password: password,
     imageUrl: 'https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg'
   });
-
   fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8')
   const access_token = createToken({ email, password });
   res.status(200).json({ access_token });
+});
+
+router.patch('/auth/user', (req, res) => {
+  const id = req.body.id;
+  if (!isRegistered(id) === false) {
+    const status = 401;
+    const message = 'User not found';
+    res.status(status).json({ status, message });
+    return;
+  }
+  const access_token = createToken({id});
+  const index = userdb.users.findIndex(k => k.id == id);
+  userdb.users[index].name = req.body.name;
+  userdb.users[index].email = req.body.email;
+  userdb.users[index].password = req.body.password;
+  userdb.users[index].imageUrl = req.body.imageUrl;
+  fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8');
+  const user = { ...req.body, access_token };
+  res.status(200).json(user);
 });
 
 server.use(/^(?!\/api\/v1\/).*$/, (req, res, next) => {
