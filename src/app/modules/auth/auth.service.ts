@@ -1,42 +1,28 @@
-import { Router } from '@angular/router';
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import ICallback from '../../shared/types/icallback.types';
+import { AuthFactory } from './auth.factory';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  user = null;
-  api = environment.apiUrl;
+  private user = null;
+  private api = environment.apiUrl;
 
   emitterIsAuthenticated = new EventEmitter<boolean>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private strg: AuthFactory) { }
 
   getUser(): any {
     if (!this.user) {
-      this.user = JSON.parse(localStorage.getItem(environment.app_userkey));
+      this.user = this.strg.getLocalStorage();
     }
     return this.user;
-  }
-
-  getTest(callback: ICallback): any {
-    this.http.get<any>(`${this.api}/auth/test`)
-      .subscribe(
-        response => {
-          if (callback) {
-            callback(null, response);
-          }
-        },
-        error => {
-          if (callback) {
-            callback(error);
-          }
-        }
-      );
   }
 
   submit(url: string, user: any, callback: ICallback): any {
@@ -66,10 +52,27 @@ export class AuthService {
 
   logout(callback?: ICallback): any {
     this.user = null;
-    localStorage.removeItem(environment.app_userkey);
+    this.strg.removeLocalStorage();
     if (callback) {
       callback(null);
     }
+  }
+
+  patchUser(user: any, callback?: ICallback) {
+    this.http.patch<any>(`${this.api}/auth/user`, user)
+      .subscribe(
+        response => {
+          this.strg.setLocalStorage(response);
+          if (callback) {
+            callback(null, response);
+          }
+        },
+        error => {
+          if (callback) {
+            callback(error);
+          }
+        }
+      );
   }
 
   isAuthenticated(token: any, callback?: ICallback): any {
@@ -77,7 +80,7 @@ export class AuthService {
       .subscribe(
         response => {
           if (!response.valid) {
-            localStorage.removeItem(environment.app_userkey);
+            this.strg.removeLocalStorage();
             callback(response);
           } else {
             callback(null, response);
