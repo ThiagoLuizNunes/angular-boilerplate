@@ -41,6 +41,6 @@ export class AuthGuard implements CanActivate {
           this.storage.removeLocalStorage();
           return of(false);
       })
-      )
+    );
   }
 }
