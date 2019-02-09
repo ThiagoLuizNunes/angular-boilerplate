@@ -1,8 +1,10 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import ICallback from '../../shared/types/icallback.types';
 import { AuthFactory } from './auth.factory';
+import { Observable, throwError } from 'rxjs';
+import { catchError, retry, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +18,11 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private strg: AuthFactory) { }
+    private authFactory: AuthFactory) { }
 
   getUser(): any {
     if (!this.user) {
-      this.user = this.strg.getLocalStorage();
+      this.user = this.authFactory.getLocalStorage();
     }
     return this.user;
   }
@@ -52,7 +54,7 @@ export class AuthService {
 
   logout(callback?: ICallback): any {
     this.user = null;
-    this.strg.removeLocalStorage();
+    this.authFactory.removeLocalStorage();
     if (callback) {
       callback(null);
     }
@@ -62,7 +64,7 @@ export class AuthService {
     this.http.patch<any>(`${this.api}/auth/user`, user)
       .subscribe(
         response => {
-          this.strg.setLocalStorage(response);
+          this.authFactory.setLocalStorage(response);
           if (callback) {
             callback(null, response);
           }
@@ -74,23 +76,19 @@ export class AuthService {
         }
       );
   }
+  getUserLicenses(id: any): Observable<any> {
+    return this.http.get<any>(`${this.api}/auth/user-licenses/${id}`)
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        catchError(this.authFactory.handleError)
+      );
+  }
 
-  isAuthenticated(token: any, callback?: ICallback): any {
-    this.http.post<any>(`${this.api}/auth/validateToken`, { token })
-      .subscribe(
-        response => {
-          if (!response.valid) {
-            this.strg.removeLocalStorage();
-            callback(response);
-          } else {
-            callback(null, response);
-          }
-        },
-        error => {
-          if (callback) {
-            callback(error);
-          }
-        }
+  isAuthenticated(token: any): Observable<any> {
+    return this.http.post<any>(`${this.api}/auth/validateToken`, { token })
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        catchError(this.authFactory.handleError)
       );
   }
 }
