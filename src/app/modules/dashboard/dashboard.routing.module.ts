@@ -16,7 +16,7 @@ const dashboardRoutes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'overview' },
       { path: 'overview', component: OverviewComponent },
-      { path: 'profile', component: ProfileComponent },
+      { path: 'profile', component: ProfileComponent, resolve: { user: UserDetailResolver } },
       { path: '**', pathMatch: 'full', redirectTo: 'overview' },
     ]
   },

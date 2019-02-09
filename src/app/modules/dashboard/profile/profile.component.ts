@@ -50,20 +50,12 @@ export class ProfileComponent implements OnInit {
     form.value.id = this.user.id;
     form.value.imageUrl = this.user.imageUrl;
     delete form.value.confirm_password;
-
-
-    console.log('Old', this.user);
-    console.log('Form value', form.value);
-
-
     this.authService.patchUser(form.value, (err, res) => {
       if (err) {
         this.toastr.error(err.error.message);
         return;
       }
-      // this.user = {...this.user.id, ...res };
-      console.log('New ', res);
-      console.log('Spread ', this.user );
+      location.reload();
       this.toastr.success(`Usuário atualizado`);
       form.reset();
     });
