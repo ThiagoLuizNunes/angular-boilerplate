@@ -36,7 +36,7 @@ function getUser(email, password) {
 
 router.post('/auth/validateToken', (req, res) => {
   const token = req.body.token || '';
-  jwt.verify(token, SECRET_KEY, err => res.status(200).send({ valid: !err }));
+  jwt.verify(token, SECRET_KEY, err => err ? res.status(400).send({ valid: !err }) : res.status(200).send({ valid: !err }));
 });
 
 router.post('/auth/login', (req, res) => {
