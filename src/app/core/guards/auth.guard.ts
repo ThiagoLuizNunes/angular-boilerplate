@@ -1,31 +1,46 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
+import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  Router
+} from '@angular/router';
 import { AuthService } from 'src/app/modules/auth/auth.service';
+import { AuthFactory } from 'src/app/modules/auth/auth.factory';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  api = environment.apiUrl;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private storage: AuthFactory,
+    ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
+    state: RouterStateSnapshot): Observable<boolean> | boolean {
 
-    const user = this.authService.getUser();
-    if (!user) {
-        this.router.navigate(['/login']);
-        return false;
-      }
-      this.authService.isAuthenticated(user.access_token, (err, res) => {
-        if (err) {
+    if (!this.authService.getUser()) {
+      this.router.navigate(['/login']);
+      return false;
+    }
+    return this.authService.isAuthenticated(this.storage.getLocalStorage().access_token)
+      .pipe(
+        map(data => {
+          if (data.valid) {
+            return true;
+          }
+        }),
+        catchError((err) => {
           this.router.navigate(['/login']);
-          return false;
-        }
-      });
-    return true;
+          this.storage.removeLocalStorage();
+          return of(false);
+      })
+      )
   }
 }
