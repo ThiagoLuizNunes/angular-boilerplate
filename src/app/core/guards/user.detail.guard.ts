@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/modules/auth/auth.service';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
 export class UserDetailResolver implements Resolve<any> {
@@ -11,7 +12,17 @@ export class UserDetailResolver implements Resolve<any> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> | Promise<any> | any {
-    const user = this.authService.getUser();
-    return user;
+
+    return this.authService.getUser()
+      .pipe(
+        map(data => {
+          return data;
+        }),
+        catchError((err) => {
+          console.log('Error in resolver: ', err);
+          return err;
+      })
+      )
   }
 }
+

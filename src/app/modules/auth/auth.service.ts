@@ -1,10 +1,10 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { AuthFactory } from './auth.factory';
+import { Observable } from 'rxjs';
+import { catchError, retry } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import ICallback from '../../shared/types/icallback.types';
-import { AuthFactory } from './auth.factory';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
