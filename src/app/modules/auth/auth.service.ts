@@ -20,11 +20,12 @@ export class AuthService {
     private http: HttpClient,
     private authFactory: AuthFactory) { }
 
-  getUser(): any {
-    if (!this.user) {
-      this.user = this.authFactory.getLocalStorage();
-    }
-    return this.user;
+  getUser(): Observable<any> {
+    return this.http.get<any>(`${this.api}/dashboard/profile`)
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        catchError(this.authFactory.handleError)
+      );
   }
 
   submit(url: string, user: any, callback: ICallback): any {
