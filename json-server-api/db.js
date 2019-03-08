@@ -13,12 +13,24 @@ function verifyToken(token) {
   return jwt.verify(token, SECRET_KEY, (err, decode) => decode !== undefined ? decode : err);
 }
 
-function isAuthenticated({ email, password }) {
-  return userdb.users.findIndex(user => user.email === email && user.password === password) !== -1;
+async function isAuthenticated(email, password) {
+  let res = true;
+  await userdb.users.findIndex(user => {
+    if (user.email === email || user.password === password) {
+      res = false;
+    }
+  });
+  return res;
 }
 
-async function isRegistered({ value }) {
-  return await userdb.users.findIndex(user => user.email === value || user.id === value) !== -1;
+async function isRegistered(value) {
+  let res = true;
+  await userdb.users.findIndex(user => {
+    if (user.email === value || user.id === value) {
+      res = false;
+    }
+  });
+  return res;
 }
 
 async function createUser(name, email, password, imageUrl) {
