@@ -1,27 +1,10 @@
 {
   "users": [
     {
-      "id": 54247,
-      "name": "Nunes",
-      "email": "nunes@gmail.com",
-      "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
-    },
-    {
-      "id": 50836,
-      "name": "Luiz",
-      "email": "nunes@gmail.com",
-      "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
-    },
-    {
-      "id": 44554,
+      "id": 25734,
       "name": "Thiago",
       "email": "thiago@gmail.com",
-      "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
-    },
-    {
-      "id": 75927,
-      "name": "Thiago",
-      "email": "thiago@gmail.com",
+      "password": "123456",
       "imageUrl": "https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg"
     }
   ]

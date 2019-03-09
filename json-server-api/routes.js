@@ -9,19 +9,14 @@ const router = express.Router();
 //   jwt.verify(token, SECRET_KEY, err => err ? res.status(400).send({ valid: !err }) : res.status(200).send({ valid: !err }));
 // });
 
-// router.post('/auth', (req, res) => {
-//   const { email, password } = req.body;
-//   db.isAuthenticated(email, password).then(result => {
-//     if (result === false) res.status(401).json({ message : 'Incorrect email or password'});
-//   })
-
-//   const access_token = await db.createToken({ email, password });
-//   const user = await db.getUser(email, password);
-//   delete user.password;
-//   delete user.licenses;
-//   user.access_token = access_token;
-//   res.status(200).json(user);
-// });
+router.post('/auth', (req, res) => {
+  const { email, password } = req.body;
+  db.isAuthenticated(email, password).then(result => {
+    if (result === false) res.status(401).json({ message : 'Incorrect email or password'});
+    const access_token = db.createToken({ email, password });
+    res.status(200).json({ token: access_token });
+  });
+});
 
 router.post('/users', (req, res) => {
   const { name, email, password } = req.body;

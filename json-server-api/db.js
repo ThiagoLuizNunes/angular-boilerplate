@@ -14,10 +14,11 @@ function verifyToken(token) {
 }
 
 async function isAuthenticated(email, password) {
-  let res = true;
+  let res = false;
   await userdb.users.findIndex(user => {
-    if (user.email === email || user.password === password) {
-      res = false;
+    if (user.email === email && user.password === password) {
+      console.log('asdsad')
+      res = true;
     }
   });
   return res;

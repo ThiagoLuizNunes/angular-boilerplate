@@ -40,6 +40,7 @@ yarn-error.log
 package-lock.json
 testem.log
 /typings
+json-server-api/users.json
 
 # System Files
 .DS_Store
