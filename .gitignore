@@ -4,10 +4,10 @@
 /dist
 /tmp
 /out-tsc
+/json-server-api/users.json
 
 # dependencies
 /node_modules
-/json-server-api/users.json
 
 # profiling files
 chrome-profiler-events.json
@@ -40,7 +40,7 @@ yarn-error.log
 package-lock.json
 testem.log
 /typings
-json-server-api/users.json
+
 
 # System Files
 .DS_Store

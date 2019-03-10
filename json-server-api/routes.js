@@ -20,13 +20,10 @@ router.post('/auth', (req, res) => {
 
 router.post('/users', (req, res) => {
   const { name, email, password } = req.body;
-  db.isRegistered(email).then(result => {
-    if (result === false) return res.status(401).json({ message: 'User already registered' });
-  });
-
   const imageUrl = 'https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg';
   db.createUser(name, email, password, imageUrl)
     .then((result) => {
+      if (result === false) return res.status(401).json({ message: 'User already registered' });
       const access_token = db.createToken({ result });
       res.status(200).json({ message: 'User registered with success', token: access_token });
     })

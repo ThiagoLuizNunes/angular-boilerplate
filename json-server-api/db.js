@@ -17,34 +17,31 @@ async function isAuthenticated(email, password) {
   let res = false;
   await userdb.users.findIndex(user => {
     if (user.email === email && user.password === password) {
-      console.log('asdsad')
       res = true;
     }
   });
   return res;
 }
 
-async function isRegistered(value) {
+async function createUser(name, email, password, imageUrl) {
   let res = true;
   await userdb.users.findIndex(user => {
-    if (user.email === value || user.id === value) {
+    if (user.email === email) {
       res = false;
     }
   });
+  if (res) {
+    const id = faker.random.number();
+    await userdb.users.push({
+      id: id,
+      name: name,
+      email: email,
+      password: password,
+      imageUrl: imageUrl
+    });
+    fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8');
+  }
   return res;
-}
-
-async function createUser(name, email, password, imageUrl) {
-  const id = faker.random.number();
-  await userdb.users.push({
-    id: id,
-    name: name,
-    email: email,
-    password: password,
-    imageUrl: imageUrl
-  });
-  fs.writeFileSync(__dirname + '/users.json', JSON.stringify(userdb, null, 2), 'utf8');
-  return id;
 }
 
 async function getUser(email, password) {
@@ -58,7 +55,6 @@ module.exports = {
   createToken,
   verifyToken,
   isAuthenticated,
-  isRegistered,
   createUser,
   getUser,
   getUserLicense
