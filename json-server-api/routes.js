@@ -11,9 +11,10 @@ const router = express.Router();
 
 router.post('/auth', (req, res) => {
   const { email, password } = req.body;
-  db.isAuthenticated(email, password).then(result => {
-    if (result === false) res.status(401).json({ message : 'Incorrect email or password'});
-    const access_token = db.createToken({ email, password });
+  db.isAuthenticated(email, password).then(response => {
+    if (!response) res.status(401).json({ message : 'Incorrect email or password'});
+    const id = response;
+    const access_token = db.createToken({ email, id });
     res.status(200).json({ token: access_token });
   });
 });
@@ -22,9 +23,10 @@ router.post('/users', (req, res) => {
   const { name, email, password } = req.body;
   const imageUrl = 'https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg';
   db.createUser(name, email, password, imageUrl)
-    .then((result) => {
-      if (result === false) return res.status(401).json({ message: 'User already registered' });
-      const access_token = db.createToken({ result });
+    .then((response) => {
+      if (!response) return res.status(401).json({ message: 'User already registered' });
+      const id = response;
+      const access_token = db.createToken({ email, id });
       res.status(200).json({ message: 'User registered with success', token: access_token });
     })
     .catch(err => {
@@ -32,8 +34,18 @@ router.post('/users', (req, res) => {
     });
 });
 
-router.get('/dashboard/profile', (req, res) => {
-
+router.get('/users', (req, res) => {
+  const authorization = 'authorization';
+  const token = req.body.token || req.query.token || req.headers[authorization];
+  console.log(token)
+  db.getUser(token)
+    .then(response => {
+      if (!response) return res.status(403).json( {message: 'Token invalid!' });
+      res.status(200).json({ message: 'Get user authorized', data: response.data });
+    })
+    .catch(err => {
+      throw err;
+    });
 });
 
 module.exports = router;
