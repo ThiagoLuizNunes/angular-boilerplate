@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
+import { AuthFactory } from '../../auth/auth.factory';
 
 @Component({
   selector: 'app-header',
@@ -12,24 +13,26 @@ export class HeaderComponent implements OnInit {
   user: any;
 
   constructor(
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private storage: AuthFactory) { }
 
   ngOnInit() {
-    this.user = this.authService.getUser();
-    if (!this.user) {
-      this.showMenu = true;
-    } else {
-      this.authService.isAuthenticated(this.user.access_token)
+    if (this.storage.getLocalStorage()) {
+      this.authService.getUser()
         .subscribe(
           data => {
+            this.user = data;
             this.showMenu = false;
           },
           err => {
             this.user = null;
             this.showMenu = true;
             return;
-          },
+          }
       );
+    } else {
+      this.user = null;
+      this.showMenu = true;
     }
   }
   logout() {
