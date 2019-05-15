@@ -21,8 +21,8 @@ export class UserDetailResolver implements Resolve<any> {
         catchError((err) => {
           console.log('Error in resolver: ', err);
           return err;
-      })
-      )
+        })
+      );
   }
 }
 

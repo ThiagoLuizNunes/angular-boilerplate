@@ -18,7 +18,6 @@ export class SignupGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): | boolean {
 
-      console.log('Signup guard');
       if (this.storage.getLocalStorage()) {
         this.router.navigate(['/dashboard']);
         return false;

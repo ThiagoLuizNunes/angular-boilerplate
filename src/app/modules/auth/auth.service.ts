@@ -21,15 +21,15 @@ export class AuthService {
     private authFactory: AuthFactory) { }
 
   getUser(): Observable<any> {
-    return this.http.get<any>(`${this.api}/dashboard/profile`)
+    return this.http.get<any>(`${this.api}/users`)
       .pipe(
-        retry(3), // retry a failed request up to 3 times
+        // retry(3), // retry a failed request up to 3 times
         catchError(this.authFactory.handleError)
       );
   }
 
   submit(url: string, user: any, callback: ICallback): any {
-    this.http.post<any>(`${this.api}/auth/${url}`, user)
+    this.http.post<any>(`${this.api}/${url}`, user)
       .subscribe(
         response => {
           localStorage.setItem(environment.app_userkey, JSON.stringify(response));
@@ -46,11 +46,11 @@ export class AuthService {
   }
 
   login(user: any, callback: ICallback): any {
-    this.submit('login', user, callback);
+    this.submit('auth', user, callback);
   }
 
   signup(user: any, callback: ICallback): any {
-    this.submit('signup', user, callback);
+    this.submit('users', user, callback);
   }
 
   logout(callback?: ICallback): any {
@@ -80,7 +80,7 @@ export class AuthService {
   getUserLicenses(id: any): Observable<any> {
     return this.http.get<any>(`${this.api}/auth/user-licenses/${id}`)
       .pipe(
-        retry(3), // retry a failed request up to 3 times
+        // retry(3), // retry a failed request up to 3 times
         catchError(this.authFactory.handleError)
       );
   }
@@ -88,7 +88,7 @@ export class AuthService {
   isAuthenticated(token: any): Observable<any> {
     return this.http.post<any>(`${this.api}/auth/validateToken`, { token })
       .pipe(
-        retry(3), // retry a failed request up to 3 times
+        // retry(3), // retry a failed request up to 3 times
         catchError(this.authFactory.handleError)
       );
   }

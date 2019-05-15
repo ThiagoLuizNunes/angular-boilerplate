@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth/auth.service';
+import { AuthFactory } from '../auth/auth.factory';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private toastr: ToastrService,
-    private authService: AuthService
+    private authService: AuthService,
+    private authFactory: AuthFactory
   ) {}
 
   ngOnInit() {
@@ -31,9 +33,11 @@ export class LoginComponent implements OnInit {
     }
     this.authService.login(this.user, (err, res) => {
       if (err) {
+        console.log(err);
         this.toastr.error(err.error.message);
         return;
       }
+      this.authFactory.setLocalStorage(res);
       this.router.navigate(['/dashboard']);
     });
   }
